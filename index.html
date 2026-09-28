@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <!-- Logo -->
+            <a href="/" class="logo">
+                <span>Give</span> AID
+            </a>
+
+            <!-- Menu -->
+            <div class="nav-menu">
+
+                <a href="/" class="nav-link active">Home</a>
+
+                <a href="/Cause/Index" class="nav-link">Causes</a>
+
+                <a href="/Donation/Index" class="nav-link donate-btn">
+                    Donate Now
+                </a>
+
+                <a href="/Home/About" class="nav-link">About Us</a>
+
+                <a href="/Home/HelpCentre" class="nav-link">Help Centre</a>
+
+                <a href="/Account/Register" class="nav-link register-btn">
+                    Register
+                </a>
+
+                <a href="/Account/Login" class="nav-link login-btn">
+                    Login
+                </a>
+
+            </div>
+
+            <!-- Mobile Button -->
+            <button class="menu-toggle" onclick="toggleMenu()">
+                ☰
+            </button>
+
+        </div>
+    </nav>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .home-page {
+            font-family: Arial, sans-serif;
+            color: #391d47;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(57, 29, 71, 0.85),
+                    rgba(57, 29, 71, 0.75)),
+                url('/assest/images/hero.jpg') center/cover no-repeat;
+        }
+
+        .hero-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 55px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: #ffc94f;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: #f5f5f5;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #ffc94f;
+            color: #391d47;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .hero-btn-outline {
+            display: inline-block;
+            padding: 14px 30px;
+            border: 2px solid white;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        /* Stats */
+        .stats {
+            padding: 45px 5%;
+            background: #ffffff;
+        }
+
+        .stats-container {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .stat-box h2 {
+            font-size: 35px;
+            color: #713b88;
+            margin: 0 0 8px;
+        }
+
+        .stat-box p {
+            margin: 0;
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* About */
+        .about {
+            padding: 80px 5%;
+            background: #f8f5fa;
+        }
+
+        .about-container {
+            max-width: 1150px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .about-content h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .about-content h2 span {
+            color: #713b88;
+        }
+
+        .about-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .read-btn {
+            display: inline-block;
+            background: #391d47;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 25px;
+        }
+
+        /* Causes */
+        .causes {
+            padding: 80px 5%;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        .cause-container {
+            max-width: 1150px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .cause-card {
+            border-radius: 18px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 8px 25px rgba(57, 29, 71, 0.10);
+        }
+
+        .cause-card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .cause-content {
+            padding: 22px;
+        }
+
+        .cause-content h3 {
+            margin-top: 0;
+            font-size: 21px;
+        }
+
+        .cause-content p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .cause-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background: #ffc94f;
+            color: #391d47;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #391d47, #713b88);
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            max-width: 650px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+            color: #eee;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cause-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                min-height: 550px;
+            }
+
+            .hero-content h1 {
+                font-size: 35px;
+            }
+
+            .hero-btn,
+            .hero-btn-outline {
+                display: block;
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content h2,
+            .section-title h2,
+            .cta h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+
+
+    <div class="home-page">
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-container">
+
+                <div class="hero-content">
+
+                    <h1>
+                        Help Us Build
+                        <span>Hope</span> & Better Lives
+                    </h1>
+
+                    <p>
+                        Give-AID connects people who want to help
+                        with causes that need support. Together,
+                        we can create a better future for everyone.
+                    </p>
+
+                    <a asp-controller="Donation" asp-action="Index" class="hero-btn">
+                        Donate Now
+                    </a>
+
+                    <a asp-controller="Home" asp-action="About" class="hero-btn-outline">
+                        Learn More
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATS -->
+        <section class="stats">
+
+            <div class="stats-container">
+
+                <div class="stat-box">
+                    <h2>5000+</h2>
+                    <p>Donations</p>
+                </div>
+
+                <div class="stat-box">
+                    <h2>20+</h2>
+                    <p>NGOs</p>
+                </div>
+
+                <div class="stat-box">
+                    <h2>50+</h2>
+                    <p>Programmes</p>
+                </div>
+
+                <div class="stat-box">
+                    <h2>10000+</h2>
+                    <p>People Helped</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+        <section class="about">
+
+            <div class="about-container">
+
+                <div class="about-image">
+                    <img src="/assest/images/about.jpg" alt="Helping people">
+                </div>
+
+                <div class="about-content">
+
+                    <h2>
+                        Together We Can
+                        <span>Make A Difference</span>
+                    </h2>
+
+                    <p>
+                        Give-AID is an NGO platform created to connect
+                        donors, volunteers and organizations with people
+                        who need help.
+                    </p>
+
+                    <p>
+                        Your small contribution can become someone's
+                        hope, education, food or support.
+                    </p>
+
+                    <a asp-controller="Home" asp-action="About" class="read-btn">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CAUSES -->
+        <section class="causes">
+
+            <div class="section-title">
+
+                <h2>Our Causes</h2>
+
+                <p>
+                    Support a cause and help create a better future.
+                </p>
+
+            </div>
+
+
+            <div class="cause-container">
+
+                <div class="cause-card">
+
+                    <img src="/assest/images/education.jpg" alt="Education">
+
+                    <div class="cause-content">
+
+                        <h3>Education</h3>
+
+                        <p>
+                            Help children get access to quality
+                            education and learning resources.
+                        </p>
+
+                        <a asp-controller="Donation" asp-action="Index" class="cause-btn">
+                            Donate
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cause-card">
+
+                    <img src="/assest/images/children.jpg" alt="Children Welfare">
+
+                    <div class="cause-content">
+
+                        <h3>Children Welfare</h3>
+
+                        <p>
+                            Support children who need food,
+                            education and a safe environment.
+                        </p>
+
+                        <a asp-controller="Donation" asp-action="Index" class="cause-btn">
+                            Donate
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cause-card">
+
+                    <img src="/assest/images/women.jpg" alt="Women Welfare">
+
+                    <div class="cause-content">
+
+                        <h3>Women Welfare</h3>
+
+                        <p>
+                            Help women become independent and
+                            build a better future.
+                        </p>
+
+                        <a asp-controller="Donation" asp-action="Index" class="cause-btn">
+                            Donate
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta">
+
+            <h2>Be A Part Of The Change</h2>
+
+            <p>
+                Your support can bring hope to someone who needs it.
+                Make a difference today with Give-AID.
+            </p>
+
+            <a asp-controller="Donation" asp-action="Index" class="hero-btn">
+                Donate Now
+            </a>
+
+        </section>
+
+    </div>
+    ```
+
+</body>
+
+</html>
